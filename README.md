@@ -2,8 +2,6 @@
 
 Here's a brief explanation of what each section does:
 
-Here's a brief explanation of what each section does:
-
 FROM nginx:latest: This sets the base image to use as a parent. In this case, we're using the latest version of the official Nginx image.
 WORKDIR /var/www/html: This sets the working directory to /var/www/html, which is where the web files will be stored.
 RUN apt-get update && \ apt-get install -y php-fpm php-mysql && \ apt-get clean && \ rm -rf /var/lib/apt/lists/*: This installs PHP and other required packages, cleans up the package manager's cache, and removes any unneeded files.
