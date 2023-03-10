@@ -13,6 +13,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy PHP-FPM configuration file to the container
 COPY php-fpm.conf /usr/local/etc/php-fpm.conf
 
+# Copy index.php file to /var/www/html
+COPY index.php /var/www/html/index.php
+
 # Start Nginx and PHP-FPM services
 CMD service nginx start && php-fpm
 
