@@ -1,29 +1,23 @@
-# Use an official Nginx runtime as a parent image
-FROM nginx:latest
+FROM php:7.4-fpm
 
-# Set working directory to /var/www/html
-WORKDIR /var/www/html
-
-# Install PHP and other required packages
+# Install required packages
 RUN apt-get update && \
-    apt-get install -y php-fpm php-mysql && \
-    apt-get clean && \
+    apt-get install -y nginx && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy Nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy PHP-FPM configuration file
-COPY php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
+COPY php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
 
-# Copy default Nginx site configuration
-COPY default.conf /etc/nginx/conf.d/default.conf
+# Set working directory
+WORKDIR /var/www/html
 
-# Copy index.php file to /var/www/html
-COPY index.php /var/www/html/index.php
+# Expose ports
+EXPOSE 80 443
 
-# Expose port 80 for Nginx
-EXPOSE 80
-
+# Start Nginx and PHP-FPM services
+CMD service nginx start && php-fpm
 # Start Nginx and PHP-FPM services
 CMD service php7.4-fpm start && nginx -g "daemon off;"
