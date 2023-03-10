@@ -20,5 +20,5 @@ COPY index.php /var/www/html/index.php
 CMD service nginx start && php-fpm
 
 # Expose 80
-EXPOSE 80
+EXPOSE 80 443
 
