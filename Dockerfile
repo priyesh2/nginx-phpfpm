@@ -16,3 +16,6 @@ COPY php-fpm.conf /usr/local/etc/php-fpm.conf
 # Start Nginx and PHP-FPM services
 CMD service nginx start && php-fpm
 
+# Expose 80
+EXPOSE 80
+
