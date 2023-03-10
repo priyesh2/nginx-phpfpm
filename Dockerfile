@@ -1,23 +1,18 @@
-FROM php:7.4-fpm
+# Use an official PHP FPM image as the base image
+FROM php:fpm
 
-# Install required packages
+# Install Nginx and other dependencies
 RUN apt-get update && \
     apt-get install -y nginx && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Copy Nginx configuration file
+# Copy Nginx configuration file to the container
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy PHP-FPM configuration file
-COPY php-fpm.conf /usr/local/etc/php-fpm.d/www.conf
-
-# Set working directory
-WORKDIR /var/www/html
-
-# Expose ports
-EXPOSE 80 443
+# Copy PHP-FPM configuration file to the container
+COPY php-fpm.conf /usr/local/etc/php-fpm.conf
 
 # Start Nginx and PHP-FPM services
 CMD service nginx start && php-fpm
-# Start Nginx and PHP-FPM services
-CMD service php7.4-fpm start && nginx -g "daemon off;"
+
