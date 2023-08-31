@@ -20,4 +20,4 @@ COPY index.php /var/www/html/index.php: This copies an example index.php file to
 
 EXPOSE 80: This exposes port 80, which is the default HTTP port for Nginx.
 
-CMD service php7.4-fpm start && nginx -g "daemon off;": This starts the PHP-FPM and Nginx services when the container is started.
+CMD service php7.4-fpm start && nginx -g "daemon off;": This starts the PHP-FPM and Nginx services when the container is started
